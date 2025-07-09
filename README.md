@@ -1,6 +1,6 @@
 # Apigee Apim Operator 
 
-This sample demonstrates how to use the Apigee APIM (Api Management) Operator to perform API management tasks such as defining API products and operations using a GKE cluster.
+This sample demonstrates how to use the Apigee  APIM Operator to perform API management tasks such as defining API products and operations using a GKE cluster.
 
 The Apigee APIM Operator is designed to support cloud-native developers by providing a command-line interface that integrates with familiar Kubernetes tools like kubectl. The operator works by using various APIM resources to keep your Google Kubernetes Engine cluster synchronized with the Apigee runtime.
 
