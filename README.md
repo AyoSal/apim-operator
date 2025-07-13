@@ -3,4 +3,80 @@ This sample demonstrates how to use the Apigee APIM Operator to perform API mana
 
 The Apigee APIM Operator is designed to support cloud-native developers by providing a command-line interface that integrates with familiar Kubernetes tools like kubectl. The operator works by using various APIM resources to keep your Google Kubernetes Engine cluster synchronized with the Apigee runtime.
 
-The Operator allows you to define and manage API management aspects directly within your Kubernetes cluster using the same YAML files and kubectl commands you already use for your other Kubernetes resources (like deployments, services, etc.). It brings Apigee's powerful API management capabilities right into your Kubernetes workflow.
+The Operator allows you to define and manage API management aspects directly within your Kubernetes cluster using the same YAML files and kubectl commands you already use for your other Kubernetes resources (like deployments, services, etc). The APIM Operator brings Apigee's powerful API management capabilities right into your Kubernetes workflow.
+
+Prerequisites
+1. Provision Apigee X
+2. Have access and permissions in Google Cloud IAM to create required IAM roles and Google service accounts required 
+3. Have access to deploy API Proxies in Apigee,
+4. Have access to create Environments and Environment Groups in Apigee
+5. Have access to create API Products, Developers, and Developer Apps in Apigee
+6. Have access to provision Load Balancer Resources (ip address, forwarding rule, url map, backend service, NEGs, etc)
+7. Have access to create Load Balancer Service Extensions
+8. Make sure the following tools are available in your terminal's $PATH (Cloud Shell has these preconfigured)
+    gcloud SDK
+    curl
+    jq
+
+
+
+Configure Environment
+
+1. Authenticate:
+   Ensure your active GCP account is selected in Cloud Shell.
+
+    gcloud auth login
+
+
+2. Navigate:
+   Change to the project directory. 
+
+
+3. Configure and Source Environment:
+   Edit the 1_defaults_apim_operator.sh with your settings.
+
+Then, source it to apply the settings:
+
+source ./1_defaults_apim_operator.sh
+
+
+Create GKE Kubernetes Cluster 
+
+In this step, let's create a new GCP Kubernetes Cluster, We will create a number
+of kubernetes objects in this cluster as well as the APIM Operator.
+
+The initial architecture will look like this:
+
+1. Run the script:
+
+    ./2_create_gke_cluster.sh
+
+This script creates a zonal gke cluster in the zone and region specififed,
+deployment takes about 10 minutes and outputs the gcloud get credentials command
+to connect into the kubernetes cluster. 
+
+2. Connect to the cluster with the get credentials command
+
+Enable Service Account and IAM Roles 
+ Next, lets create the google service account to connect to Google Cloud
+ services, grant the required iam roles and permissions to the service account
+ to the service account and also create and confirm a workload identity is
+ creted.
+
+1. Run the script:
+
+   ./3_enable_sa_and_roles.sh
+
+2. Confirm workload identity is created by running the command below:
+
+kubectl run --rm -it --image google/cloud-sdk:slim \
+  --namespace apim workload-identity-test\
+  -- gcloud auth list
+
+
+
+Create Gateway, HTTPRoute and Test Application
+ 
+Next, lets create the Gateway, httproute and a test application 
+
+

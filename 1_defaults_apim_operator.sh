@@ -19,14 +19,19 @@
 # === GCP Project and GKE Cluster Details ===
 # PROJECT_ID should be set as an environment variable before running the script.
 export PROJECT_ID="YOUR PROJECT ID"
-CLUSTER_NAME="YOUR CLUSTER NAME" # Your GKE cluster name
-REGION="YOUR CLUSTER REGION"          # The region where your GKE cluster is located (e.g., us-central1)
-ZONE="YOUR CLUSTER ZONE"
-MACHINE_TYPE="e2-medium"
+export CLUSTER_NAME="YOUR CLUSTER NAME" # Your GKE cluster name
+export REGION="YOUR CLUSTER REGION"          # The region where your GKE cluster is located (e.g., us-central1)
+export ZONE="YOUR CLUSTER ZONE"
+export MACHINE_TYPE="e2-medium"
 
-# === Apigee Organization Details ===
+# === Apigee Config  Details ===
 # APIGEE_ORG is often the same as PROJECT_ID for simplicity, but can be different.
 export APIGEE_ORG="${PROJECT_ID}" # Your Apigee organization ID
+export ENV_NAME="${APIGEE_APIM}-env"
+export DEVELOPER_NAME="${APIGEE_APIM_DEVELOPER}-dev"
+export DEVELOPER_APP_NAME="${APIGEE_APIM_APP}-app"
+export PROXY_BUNDLE_DIR="bundle/apiproxy"
+
 
 # === Service Account Names ===
 export APIGEE_APIM_GSA_NAME="apigee-apim-gsa" # Name for the Google Service Account for APIM Operator
@@ -34,18 +39,13 @@ export KSA_NAMESPACE="apim"                   # Kubernetes namespace for the API
 export KSA_NAME="apim-ksa"                    # Kubernetes Service Account name for APIM Operator
 export APIGEE_APIM_GSA_EMAIL="apigee-apim-gsa@$PROJECT_ID.iam.gserviceaccount.com"
 
-# These paths are examples and MUST be updated to your actual file locations.
-export APIM_CRDS_HELM_CHART_PATH="oci://us-docker.pkg.dev/apigee-release/apigee-k8s-tooling-helm-charts/apigee-apim-operator-crds"
+# Paths for APIM Operator CRD and Operator helm charts locations.
+export CRDS_CHART_PATH="oci://us-docker.pkg.dev/apigee-release/apigee-k8s-tooling-helm-charts/apigee-apim-operator-crds"
 export APIM_OPERATOR_HELM_CHART_PATH="oci://us-docker.pkg.dev/apigee-release/apigee-k8s-tooling-helm-charts/apigee-apim-operator-helm"
 
-# Helm Chart Versions (ensure these match your .tgz file versions)
+# Helm Chart Versions 
 export APIM_CRDS_HELM_VERSION="1.0.0"
 export APIM_OPERATOR_HELM_VERSION="1.0.0"
 
-# === Apigee Operator Specific Settings ===
-export APIGEE_MGMT_URL="https://autopush-apigee.sandbox.googleapis.com" # Apigee Management API URL
-# Controller Image (ensure this matches the image you intend to use)
-CONTROLLER_IMAGE="us-west1-docker.pkg.dev/apim-operator-bootcamp-20/apim-operator-testing/apim-operator:20771_90de6d012"
-#!/bin/bash
 
 

@@ -19,7 +19,7 @@
 echo ""
 echo "🔄 1. Installing Apigee APIM CRDs with Helm..."
 # Displaying the OCI chart path being used for clarity
-CRD_CHART_PATH="oci://us-docker.pkg.dev/apigee-release/apigee-k8s-tooling-helm-charts/apigee-apim-operator-crds"
+#CRD_CHART_PATH="oci://us-docker.pkg.dev/apigee-release/apigee-k8s-tooling-helm-charts/apigee-apim-operator-crds"
 
 # Helm command for CRDs
 helm install apigee-apim-crds -n "${KSA_NAMESPACE}" \
