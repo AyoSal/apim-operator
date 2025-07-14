@@ -96,8 +96,9 @@ Next, lets create the Gateway, httproute and a httpbin test application
 
     kubectl exec shell-demo -c nginx -- curl GATEWAY_IP_ADDRESS.nip.io:80/get
 
+The architecture should now look like this
 
-
+![Architecture with Loadbalancer, Gateway and HttpRoute installed](images/v2-Apim-gw-httproute-arch.png)
 
 Install the CRDs and Install the Apigee APIM Operator 
     Next we will instlal the helm charts for the CRDs and the Apim Operator.
@@ -110,8 +111,15 @@ Install the CRDs and Install the Apigee APIM Operator
 2. run the validation command to see the operator pod: 
 
     kubectl get pods -n apim 
-    
+
+The architecture should now look like this
+
+![Architecture with CRDs Installed](images/crds-arch.png)
+
 
 Install the APIM EXtension Policy
 
 
+With the Extension Policy installed, the service extension gets created and the architecture should now look like this 
+
+![Architecture with Service Extension Installed](images/svc-ext.png)
