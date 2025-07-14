@@ -1,11 +1,11 @@
-Apigee Apim Operator
+ **Apigee Apim Operator**
 This sample demonstrates how to use the Apigee APIM Operator to perform API management tasks such as defining API products and operations using a GKE cluster.
 
 The Apigee APIM Operator is designed to support cloud-native developers by providing a command-line interface that integrates with familiar Kubernetes tools like kubectl. The operator works by using various APIM resources to keep your Google Kubernetes Engine cluster synchronized with the Apigee runtime.
 
 The Operator allows you to define and manage API management aspects directly within your Kubernetes cluster using the same YAML files and kubectl commands you already use for your other Kubernetes resources (like deployments, services, etc). The APIM Operator brings Apigee's powerful API management capabilities right into your Kubernetes workflow.
 
-Prerequisites
+ **Prerequisites**
 1. Provision Apigee X
 2. Have access and permissions in Google Cloud IAM to create required IAM roles and Google service accounts required 
 3. Have access to deploy API Proxies in Apigee,
@@ -20,7 +20,7 @@ Prerequisites
 
 
 
-Configure Environment
+ **Configure Environment**
 
 1. Authenticate:
    Ensure your active GCP account is selected in Cloud Shell.
@@ -40,7 +40,7 @@ Then, source it to apply the settings:
 source ./1_defaults_apim_operator.sh
 
 
-Create GKE Kubernetes Cluster 
+**Create GKE Kubernetes Cluster**
 
 In this step, let's create a new GCP Kubernetes Cluster, We will create a number
 of kubernetes objects in this cluster as well as the APIM Operator.
@@ -57,7 +57,7 @@ to connect into the kubernetes cluster.
 
 2. Connect to the cluster with the get credentials command
 
-Enable Service Account and IAM Roles 
+**Enable Service Account and IAM Roles** 
  Next, lets create the google service account to connect to Google Cloud
  services, grant the required iam roles and permissions to the service account
  to the service account and also create and confirm a workload identity is
@@ -75,7 +75,7 @@ kubectl run --rm -it --image google/cloud-sdk:slim \
 
 
 
-Create Gateway, HTTPRoute and Test Application
+**Create Gateway, HTTPRoute and Test Application**
  
 Next, lets create the Gateway, httproute and a httpbin test application 
 
@@ -100,7 +100,8 @@ The architecture should now look like this
 
 ![Architecture with Loadbalancer, Gateway and HttpRoute installed](images/v2-Apim-gw-httproute-arch.png)
 
-Install the CRDs and Install the Apigee APIM Operator 
+
+**Install the CRDs and Install the Apigee APIM Operator** 
     Next we will instlal the helm charts for the CRDs and the Apim Operator.
     Once completed, we should have an operator pod in running state. 
 
@@ -117,7 +118,7 @@ The architecture should now look like this
 ![Architecture with CRDs Installed](images/crds-arch.png)
 
 
-Install the APIM EXtension Policy
+**Install the APIM EXtension Policy**
 
 
 With the Extension Policy installed, the service extension gets created and the architecture should now look like this 
