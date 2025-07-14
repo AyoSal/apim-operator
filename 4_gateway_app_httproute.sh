@@ -6,7 +6,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#       http://www.apache.org/licenses/LICENSE-2.0
+#         http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,29 +16,16 @@
 
 set -e
 
-#export GATEWAY_IP_ADDRESS=$(kubectl get gateways.gateway.networking.k8s.io global-ext-bin -o=jsonpath="{.status.addresses[0].value}")
-export GATEWAY_IP_ADDRESS="DUMMY IP ADDRESS"
 # --- Prerequisites and Variable Checks ---
 
 # Ensure kubectl is installed and configured
-if ! command -v kubectl &> /dev/null
-then
+if ! command -v kubectl &> /dev/null; then
     echo "❌ Error: kubectl command not found. Please install kubectl and ensure it's in your PATH."
     exit 1
 fi
 
-# Check if GATEWAY_IP_ADDRESS is set. This variable should come from your GCE Load Balancer creation script.
-if [ -z "$GATEWAY_IP_ADDRESS" ]; then
-  echo "❌ Error: No GATEWAY_IP_ADDRESS variable set."
-  echo "Please set it (e.g., export GATEWAY_IP_ADDRESS=\"YOUR_LOAD_BALANCER_IP\") and re-run."
-  exit 1
-fi
-
 echo "Starting script to deploy Kubernetes Gateway API objects..."
-echo "Using GATEWAY_IP_ADDRESS: $GATEWAY_IP_ADDRESS"
-echo "The HTTPRoute hostname will be: $GATEWAY_IP_ADDRESS.nip.io"
 echo ""
-
 
 # --- 2. Deploy httpbin Kubernetes application (Namespace, ServiceAccount, Service, Deployment) ---
 echo "🔄 2. Applying httpbin application (Namespace, ServiceAccount, Service, Deployment)..."
@@ -127,6 +114,31 @@ EOF
 echo "✅ Kubernetes Gateway applied."
 echo ""
 
+# --- Get Gateway IP Address ---
+echo "Waiting for Gateway 'global-ext-bin' to receive an external IP address..."
+GATEWAY_IP_ADDRESS=""
+ATTEMPTS=0
+MAX_ATTEMPTS=60 # Wait up to 10 minutes (60 * 10 seconds)
+while [ -z "$GATEWAY_IP_ADDRESS" ] && [ $ATTEMPTS -lt $MAX_ATTEMPTS ]; do
+    GATEWAY_IP_ADDRESS=$(kubectl get gateways.gateway.networking.k8s.io global-ext-bin -n default -o=jsonpath="{.status.addresses[0].value}" 2>/dev/null || true)
+    if [ -z "$GATEWAY_IP_ADDRESS" ]; then
+        echo "Still waiting for Gateway IP... (Attempt $((ATTEMPTS+1)) of $MAX_ATTEMPTS)"
+        sleep 10 # Wait 10 seconds before retrying
+        ATTEMPTS=$((ATTEMPTS+1))
+    fi
+done
+
+if [ -z "$GATEWAY_IP_ADDRESS" ]; then
+    echo "❌ Error: Timed out waiting for Gateway IP address to be assigned."
+    echo "Please check the Gateway status manually: kubectl get gateway global-ext-bin -n default"
+    exit 1
+fi
+
+export GATEWAY_IP_ADDRESS
+echo "✅ Gateway IP Address retrieved: $GATEWAY_IP_ADDRESS"
+echo "The HTTPRoute hostname will be: $GATEWAY_IP_ADDRESS.nip.io"
+echo ""
+
 # --- 3. Deploy Kubernetes HTTPRoute ---
 echo "🔄 3. Applying Kubernetes HTTPRoute (http-bin-route)..."
 cat <<EOF | kubectl apply -f -
@@ -165,6 +177,3 @@ echo "To verify the Gateway status, you can use:"
 echo "  kubectl get gateway global-ext-bin -n default"
 echo "To verify the HTTPRoute status, you can use:"
 echo "  kubectl get httproute http-bin-route -n http"
-#!/bin/bash
-
-
