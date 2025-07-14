@@ -146,3 +146,89 @@ Next we will create the developer and app in Apigee using the script below
 ```bash
     ./8_create-developer-app.sh
 ```
+
+Now we have created all the resources, the completed architecture will look as below.
+
+![Complete Architecture](images/Complete-arch.png)
+
+**Test API Key Enforcement**
+Now we have created an APP in Apigee and have an API Key, we can use the following command to send a request to the Gateway using the API key to test API key enforcement.
+```bash
+     curl http://GATEWAY_IP_ADDRESS/get -H "Host: HOST_NAME" -H "x-api-key: API_KEY"
+```
+
+Where GATEWAY_IP_ADDRESS is the ip address of the Gateway.
+HOST_NAME is the hostname defined in the Gateways HTTPRoute/
+API_KEY is the API Key value obtained  from running script 8 above. 
+You can retrieve the Gateway IP address using te follwoing command
+
+```bash
+    kubectl get gateways.gateway.networking.k8s.io GATEWAY_NAME -o=jsonpath="{.status.addresses[0].value}"
+```
+
+
+The request should succeed and return a response similar to the following:
+
+```bash
+    {
+  "args": {},
+  "headers": {
+    "Accept": "*/*",
+    "Host": "apigee-apim-operator-test.apigee.net",
+    "User-Agent": "curl/8.7.1",
+    "X-Api-Key": "f0N6sYYYclGYYYe0oP5YYYdA20PjgrP2x8YYYh7z4YYYKiYt",
+    "X-Cloud-Trace-Context": "bb3a768787099bda628781188bfb318b/15554891713516675739"
+  },
+  "origin": "34.54.193.72",
+  "url": "https://34.54.193.72/get"
+}
+```
+
+**Test Quota Enforcement**
+To test the quota enforcement defined in your APIM extension policy, send the request from the previous step to the Gateway ten times within the span of one minute.
+
+You can run the following script to generate the requests:
+
+```bash
+    #!/bin/sh
+for i in $(seq 1 11); do
+    curl http://GATEWAY_IP_ADDRESS/get -H "Host: HOST_NAME" -H "x-api-key: API_KEY"
+    sleep 1
+done
+```
+
+This action should trigger a quota violation and raise a fault similar to the following:
+
+```bash
+    {"fault":{"faultstring":"Rate limit quota violation. Quota limit  exceeded. Identifier : _default","detail":{"errorcode":"policies.ratelimit.QuotaViolation"}}}
+```
+
+
+
+**Test REST Operations Enforcement**
+To test the rest operations enforcement, use the following command to send a request to the Gateway using a URL that is not in the API operation set:
+
+```bash
+    curl http://GATEWAY_IP_ADDRESS/post -H "Host: HOST_NAME" -H "x-api-key: API_KEY"
+```
+The request should fail with a response similar to the following:
+
+```bash
+    {"fault":{"faultstring":"Invalid ApiKey for given resource","detail":{"errorcode":"oauth.v2.InvalidApiKeyForGivenResource"}}}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
