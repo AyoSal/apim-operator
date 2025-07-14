@@ -77,6 +77,41 @@ kubectl run --rm -it --image google/cloud-sdk:slim \
 
 Create Gateway, HTTPRoute and Test Application
  
-Next, lets create the Gateway, httproute and a test application 
+Next, lets create the Gateway, httproute and a httpbin test application 
+
+1. Run the script:
+    ./4_gateway_app_httproute.sh
+
+2. Run a cURL request to access the httpbin test application through the Gateway   
+    Note that it may take up to 5 minutes to get a successsful response from the
+    command below while the gateway and httproute are being setup
+    
+
+    curl GATEWAY_IP_ADDRESS.nip.io:80/get 
+
+3. If using an internal load balancer, create the shell-demo pod and run the
+   curl from there with following commands: 
+    
+    kubectl apply -f shell-demo.yaml 
+
+    kubectl exec shell-demo -c nginx -- curl GATEWAY_IP_ADDRESS.nip.io:80/get
+
+
+
+
+Install the CRDs and Install the Apigee APIM Operator 
+    Next we will instlal the helm charts for the CRDs and the Apim Operator.
+    Once completed, we should have an operator pod in running state. 
+
+1. Run the script:
+    
+    ./5_crds_operator.sh
+
+2. run the validation command to see the operator pod: 
+
+    kubectl get pods -n apim 
+    
+
+Install the APIM EXtension Policy
 
 
