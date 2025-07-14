@@ -103,8 +103,8 @@ The architecture should now look like this
 
 
 **Install the CRDs and Install the Apigee APIM Operator** 
-    Next we will instlal the helm charts for the CRDs and the Apim Operator.
-    Once completed, we should have an operator pod in running state. 
+Next we will install the helm charts for the CRDs and the Apim Operator.
+Once completed, we should have an operator pod in running state. 
 
 1. Run the script:
 ```bash    
@@ -119,9 +119,30 @@ The architecture should now look like this
 ![Architecture with CRDs Installed](images/crds-arch.png)
 
 
-**Install the APIM EXtension Policy**
+**Install the APIM Extension Policy**
 
-
-With the Extension Policy installed, the service extension gets created and the architecture should now look like this 
+Next we will install the APIM extension policy. Once the Extension Policy installed, the service extension gets created and is visible within the Load balancer UI in the GCP console.
+1. Run the script:
+```bash
+    ./6_apimextpolicy.sh
+```
+The architecture should now look like this 
 
 ![Architecture with Service Extension Installed](images/svc-ext.png)
+
+
+**Create the Apigee Objects**
+Next we will create APIM objects required
+
+1. Run the script:
+```bash
+    ./7_create_apim_objects.sh
+```
+
+
+**Create the Developer and App in Apigee**
+Next we will create the developer and app in Apigee using the script below
+1. Run the script:
+```bash
+    ./8_create-developer-app.sh
+```
