@@ -23,7 +23,7 @@ echo "🔄 1. Installing Apigee APIM CRDs with Helm..."
 
 # Helm command for CRDs
 helm install apigee-apim-crds -n "${KSA_NAMESPACE}" \
-  "${CRD_CHART_PATH}" \
+  "${CRDS_CHART_PATH}" \
   --version 1.0.0 \
  --atomic 
 
