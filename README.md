@@ -1,4 +1,5 @@
  **Apigee Apim Operator**
+ 
 This sample demonstrates how to use the Apigee APIM Operator to perform API management tasks such as defining API products and operations using a GKE cluster.
 
 The Apigee APIM Operator is designed to support cloud-native developers by providing a command-line interface that integrates with familiar Kubernetes tools like kubectl. The operator works by using various APIM resources to keep your Google Kubernetes Engine cluster synchronized with the Apigee runtime.
@@ -14,9 +15,9 @@ The Operator allows you to define and manage API management aspects directly wit
 6. Have access to provision Load Balancer Resources (ip address, forwarding rule, url map, backend service, NEGs, etc)
 7. Have access to create Load Balancer Service Extensions
 8. Make sure the following tools are available in your terminal's $PATH (Cloud Shell has these preconfigured)
-    gcloud SDK
-    curl
-    jq
+    - gcloud SDK
+    - curl
+    - jq
 
 
 
@@ -36,9 +37,9 @@ The Operator allows you to define and manage API management aspects directly wit
    Edit the 1_defaults_apim_operator.sh with your settings.
 
 Then, source it to apply the settings:
-
+```bash
 source ./1_defaults_apim_operator.sh
-
+```
 
 **Create GKE Kubernetes Cluster**
 
@@ -48,9 +49,9 @@ of kubernetes objects in this cluster as well as the APIM Operator.
 The initial architecture will look like this:
 
 1. Run the script:
-
+```bash
     ./2_create_gke_cluster.sh
-
+```
 This script creates a zonal gke cluster in the zone and region specififed,
 deployment takes about 10 minutes and outputs the gcloud get credentials command
 to connect into the kubernetes cluster. 
@@ -64,15 +65,15 @@ to connect into the kubernetes cluster.
  creted.
 
 1. Run the script:
-
+```bash
    ./3_enable_sa_and_roles.sh
-
+```
 2. Confirm workload identity is created by running the command below:
-
+```bash
 kubectl run --rm -it --image google/cloud-sdk:slim \
   --namespace apim workload-identity-test\
   -- gcloud auth list
-
+```
 
 
 **Create Gateway, HTTPRoute and Test Application**
@@ -80,22 +81,22 @@ kubectl run --rm -it --image google/cloud-sdk:slim \
 Next, lets create the Gateway, httproute and a httpbin test application 
 
 1. Run the script:
+```bash
     ./4_gateway_app_httproute.sh
-
-2. Run a cURL request to access the httpbin test application through the Gateway   
+```
+3. Run a cURL request to access the httpbin test application through the Gateway   
     Note that it may take up to 5 minutes to get a successsful response from the
     command below while the gateway and httproute are being setup
     
-
+```bash
     curl GATEWAY_IP_ADDRESS.nip.io:80/get 
-
-3. If using an internal load balancer, create the shell-demo pod and run the
+```
+4. If using an internal load balancer, create the shell-demo pod and run the
    curl from there with following commands: 
-    
+```bash    
     kubectl apply -f shell-demo.yaml 
-
     kubectl exec shell-demo -c nginx -- curl GATEWAY_IP_ADDRESS.nip.io:80/get
-
+```
 The architecture should now look like this
 
 ![Architecture with Loadbalancer, Gateway and HttpRoute installed](images/v2-Apim-gw-httproute-arch.png)
@@ -106,13 +107,13 @@ The architecture should now look like this
     Once completed, we should have an operator pod in running state. 
 
 1. Run the script:
-    
+```bash    
     ./5_crds_operator.sh
-
+```
 2. run the validation command to see the operator pod: 
-
+```bash
     kubectl get pods -n apim 
-
+```
 The architecture should now look like this
 
 ![Architecture with CRDs Installed](images/crds-arch.png)
