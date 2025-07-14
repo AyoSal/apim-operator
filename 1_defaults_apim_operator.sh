@@ -30,8 +30,10 @@ export APIGEE_ORG="${PROJECT_ID}" # Your Apigee organization ID
 export ENV_NAME="${APIGEE_APIM}-env"
 export DEVELOPER_NAME="${APIGEE_APIM_DEVELOPER}-dev"
 export DEVELOPER_APP_NAME="${APIGEE_APIM_APP}-app"
-export PROXY_BUNDLE_DIR="bundle/apiproxy"
 
+
+# Do not change the below variables
+export PRODUCT_NAME="api-product"
 
 # === Service Account Names ===
 export APIGEE_APIM_GSA_NAME="apigee-apim-gsa" # Name for the Google Service Account for APIM Operator
