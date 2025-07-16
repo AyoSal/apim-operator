@@ -44,7 +44,9 @@ This script creates a zonal gke cluster in the zone and region specififed, deplo
 
 Connect to the cluster with the get credentials command
 
-### Enable Service Account and IAM Roles 
+
+
+## Enable Service Account and IAM Roles 
 
 Next, lets create the google service account to connect to Google Cloud services, grant the required iam roles and permissions to the service account to the service account and also create and confirm a workload identity is creted.
 
@@ -82,7 +84,7 @@ If using an internal load balancer, create the shell-demo pod and run the curl f
 ```
 
 
-### Install the CRDs and the Apigee APIM Operator
+## Install the CRDs and the Apigee APIM Operator
 
 Next we will install the helm charts for the CRDs and the Apim Operator. Once completed, we should have an operator pod in running state.
 ```bash
@@ -104,7 +106,7 @@ Run the script:
     ./6_apimextpolicy.sh
 ```
 
-### Create the Apigee Objects
+## Create the Apigee Objects
 
 Next we will create APIM objects required
 
@@ -124,7 +126,7 @@ Run the script:
 Now we have created all the resources, Lets go into some testing!
 
 
-### Test API Key Enforcement 
+## Test API Key Enforcement 
 
 Now we have created an APP in Apigee and have an API Key, we can use the following command to send a request to the Gateway using the API key to test API key enforcement.
 ```bash
@@ -172,7 +174,7 @@ This action should trigger a quota violation and raise a fault similar to the fo
     {"fault":{"faultstring":"Rate limit quota violation. Quota limit  exceeded. Identifier : _default","detail":{"errorcode":"policies.ratelimit.QuotaViolation"}}}
 ```
 
-### Test REST Operations Enforcement
+## Test REST Operations Enforcement
 To test the rest operations enforcement, use the following command to send a request to the Gateway using a URL that is not in the API operation set:
 ```bash
     curl http://GATEWAY_IP_ADDRESS/post -H "Host: HOST_NAME" -H "x-api-key: API_KEY"
