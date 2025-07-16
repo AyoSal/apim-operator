@@ -7,7 +7,7 @@ The Apigee APIM Operator is designed to support cloud-native developers by provi
 The Operator allows you to define and manage API management aspects directly within your Kubernetes cluster using the same YAML files and kubectl commands you already use for your other Kubernetes resources (like deployments, services, etc). The APIM Operator brings Apigee's powerful API management capabilities right into your Kubernetes workflow.
 
  **Prerequisites**
-1. Provision Apigee X
+1. Provision Apigee X, ensure Apigee X is created in the same region as the GKE cluster created in Create GKE Kubernetes Cluster step
 2. Have access and permissions in Google Cloud IAM to create required IAM roles and Google service accounts required 
 3. Have access to deploy API Proxies in Apigee,
 4. Have access to create Environments and Environment Groups in Apigee
