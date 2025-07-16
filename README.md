@@ -21,6 +21,8 @@ The Operator allows you to define and manage API management aspects directly wit
 
 **(QuickStart) Setup using CloudShell**
 Use the following GCP CloudShell tutorial, and follow the instructions in Cloud Shell. Alternatively, follow the instructions below.
+
+
 [![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://ssh.cloud.google.com/cloudshell/open?cloudshell_git_repo=https://github.com/AyoSal/apim-operator.git&cloudshell_tutorial=docs/clodshell-tutorial.md)
 
 
