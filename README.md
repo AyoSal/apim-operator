@@ -218,10 +218,29 @@ The request should fail with a response similar to the following:
 ```
 
 
+Then, run the following scripts to clean up the resources created earlier.
 
-
-
-
+```bash
+    cleanup1-developer-app.sh
+```
+```bash
+    cleanup2-product-operationset.sh
+```
+```bash
+    cleanup3-apimextension.sh
+```
+```bash
+    cleanup4-helm-charts.sh
+```
+```bash
+    cleanup5-gw-httproute.sh
+```
+```bash
+    cleanup6-sa-roles.sh
+```
+```bash
+    cleanup7-cluster.sh
+```
 
 
 
