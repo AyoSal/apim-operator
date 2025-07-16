@@ -181,7 +181,11 @@ The request should fail with a response similar to the following:
 ```bash
     {"fault":{"faultstring":"Invalid ApiKey for given resource","detail":{"errorcode":"oauth.v2.InvalidApiKeyForGivenResource"}}}
 ```
-Then, run the following scripts to clean up the resources created earlier.
+
+Congratulations!!!  <walkthrough-conclusion-trophy></walkthrough-conclusion-trophy> You have Successfully setup the Apigee APIM Operatpr!!!
+
+You can now run the following scripts to clean up the resources created earlier.
+
 ```bash
     cleanup1-developer-app.sh
 ```
