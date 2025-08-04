@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 
 # Copyright 2025 Google LLC
 #
@@ -36,7 +35,7 @@ spec:
   timeout: 1000ms
   defaultSecurityEnabled: true
   targetRef: # identifies the Gateway where the extension must be applied
-    name: global-ext-lb1
+    name: global-ext-bin
     kind: Gateway
     namespace: default
 EOF
