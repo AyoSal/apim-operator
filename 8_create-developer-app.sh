@@ -23,7 +23,7 @@ fi
 
 # Source default values
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-source "$SCRIPT_DIR/defaults.sh"
+source "$SCRIPT_DIR/1_defaults_apim_operator.sh"
 
 echo "🔄 Installing apigeecli ..."
 curl -s https://raw.githubusercontent.com/apigee/apigeecli/main/downloadLatest.sh | bash
