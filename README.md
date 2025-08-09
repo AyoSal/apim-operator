@@ -86,6 +86,7 @@ kubectl run --rm -it --image google/cloud-sdk:slim \
 Next, lets create the Gateway, httproute and a httpbin test application 
 
 1. Run the script:
+   
 ```bash
     ./4_gateway_app_httproute.sh
 ```
@@ -97,7 +98,8 @@ Next, lets create the Gateway, httproute and a httpbin test application
     curl GATEWAY_IP_ADDRESS.nip.io:80/get 
 ```
 4. If using an internal load balancer, create the shell-demo pod and run the
-   curl from there with following commands: 
+   curl from there with following commands:
+   
 ```bash    
     kubectl apply -f shell-demo.yaml 
     kubectl exec shell-demo -c nginx -- curl GATEWAY_IP_ADDRESS.nip.io:80/get
@@ -112,10 +114,12 @@ Next we will install the helm charts for the CRDs and the Apim Operator.
 Once completed, we should have an operator pod in running state. 
 
 1. Run the script:
+   
 ```bash    
-    ./5_crds_operator.sh
+    ./5_helm_install_crds_operator.sh
 ```
-2. run the validation command to see the operator pod: 
+2. run the validation command to see the operator pod:
+   
 ```bash
     kubectl get pods -n apim 
 ```
@@ -128,6 +132,7 @@ The architecture should now look like this
 
 Next we will install the APIM extension policy. Once the Extension Policy installed, the service extension gets created and is visible within the Load balancer UI in the GCP console.
 1. Run the script:
+   
 ```bash
     ./6_apimextpolicy.sh
 ```
@@ -140,6 +145,7 @@ The architecture should now look like this
 Next we will create APIM objects required
 
 1. Run the script:
+   
 ```bash
     ./7_create_apim_objects.sh
 ```
@@ -148,6 +154,7 @@ Next we will create APIM objects required
 **Create the Developer and App in Apigee**
 Next we will create the developer and app in Apigee using the script below
 1. Run the script:
+   
 ```bash
     ./8_create-developer-app.sh
 ```
