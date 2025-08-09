@@ -67,13 +67,20 @@ to connect into the kubernetes cluster.
  Next, lets create the google service account to connect to Google Cloud
  services, grant the required iam roles and permissions to the service account
  to the service account and also create and confirm a workload identity is
- creted.
+ created.
 
 1. Run the script:
 ```bash
    ./3_enable_sa_and_roles.sh
 ```
-2. Confirm workload identity is created by running the command below:
+
+2. Confirm the kubernetes service account was created.
+```bash
+    kubectl get sa -n apim
+```
+
+If its not created run the script 
+3. Confirm workload identity is created by running the command below:
 ```bash
 kubectl run --rm -it --image google/cloud-sdk:slim \
   --namespace apim workload-identity-test\
