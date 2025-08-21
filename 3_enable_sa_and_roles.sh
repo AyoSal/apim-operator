@@ -90,6 +90,7 @@ ROLES=(
   "roles/compute.networkAdmin"
   "roles/compute.loadBalancerAdmin"
   "roles/compute.networkUser"
+  "roles/iam.serviceAccountUser"
   "roles/iam.workloadIdentityUser" # Allows the GSA to be impersonated by a KSA
 )
 
