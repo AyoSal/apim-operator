@@ -159,12 +159,8 @@ Next we will create APIM objects required
 
 
 **Create the Developer and App in Apigee**
-Next we will create the developer and app in Apigee using the script below
-1. Run the script:
-   
-```bash
-    ./8_create-developer-app.sh
-```
+Next we will create the developer and app in Apigee using the UI
+
 
 Now we have created all the resources, the completed architecture will look as below.
 
