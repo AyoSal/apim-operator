@@ -27,9 +27,9 @@ export MACHINE_TYPE="e2-medium"
 # === Apigee Config  Details ===
 # APIGEE_ORG is often the same as PROJECT_ID for simplicity, but can be different.
 export APIGEE_ORG="${PROJECT_ID}" # Your Apigee organization ID
-export ENV_NAME="${APIGEE_APIM}-env"
-export DEVELOPER_NAME="${APIGEE_APIM_DEVELOPER}-dev"
-export DEVELOPER_APP_NAME="${APIGEE_APIM_APP}-app"
+export ENV_NAME="YOUR APIEE ENVIRONMENT NAME"
+export DEVELOPER_NAME="YOUR DEVELOPER NAME"
+export DEVELOPER_APP_NAME="YOUR APIGEE APP NAME"
 
 
 # Do not change the below variables
