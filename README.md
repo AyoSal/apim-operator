@@ -8,13 +8,14 @@ The Operator allows you to define and manage API management aspects directly wit
 
  **Prerequisites**
 1. Provision Apigee X, ensure Apigee X is created in the same region as the GKE cluster created in Create GKE Kubernetes Cluster step
-2. Have access and permissions in Google Cloud IAM to create required IAM roles and Google service accounts required 
-3. Have access to deploy API Proxies in Apigee,
-4. Have access to create Environments and Environment Groups in Apigee
-5. Have access to create API Products, Developers, and Developer Apps in Apigee
-6. Have access to provision Load Balancer Resources (ip address, forwarding rule, url map, backend service, NEGs, etc)
-7. Have access to create Load Balancer Service Extensions
-8. Make sure the following tools are available in your terminal's $PATH (Cloud Shell has these preconfigured)
+2. HAvae a GCP VPC created, you can have a default VPC created
+3. Have access and permissions in Google Cloud IAM to create required IAM roles and Google service accounts required 
+4. Have access to deploy API Proxies in Apigee,
+5. Have access to create Environments and Environment Groups in Apigee
+6. Have access to create API Products, Developers, and Developer Apps in Apigee
+7. Have access to provision Load Balancer Resources (ip address, forwarding rule, url map, backend service, NEGs, etc)
+8. Have access to create Load Balancer Service Extensions
+9. Make sure the following tools are available in your terminal's $PATH (Cloud Shell has these preconfigured)
     - gcloud SDK
     - curl
     - jq
